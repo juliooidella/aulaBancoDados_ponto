@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastro de Justificativas de Falta</title>
+    <style>/* Estilo base para os links do menu */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline; /* Isso faz com que os itens fiquem na mesma linha */
+    margin-right: 10px; /* Espaço entre os botões */
+}
+
+nav a {
+    text-decoration: none;
+    background-color: #0073e6; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border-radius: 5px; /* Cantos arredondados */
+}
+
+/* Efeito de hover */
+nav a:hover {
+    background-color: #0056a0; /* Cor de fundo quando o mouse passa por cima */
+}</style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/cadastrar-cargo">Cadastro de Cargos</a></li>
+            <li><a href="/cadastrar-funcionario">Cadastro de Funcionários</a></li>
+            <li><a href="/cadastrar-justificativas">Cadastro de Justificativas de Falta</a></li>
+        </ul>
+    </nav>
+    <h1>Cadastro de Justificativas de Falta</h1>
+    <form id="justificativaFaltaForm">
+        <label for="id_funcionario">Funcionário:</label>
+        <select id="id_funcionario" required>
+            <!-- As opções para funcionários serão preenchidas dinamicamente no JavaScript -->
+        </select><br><br>
+
+        <label for="data_falta">Data da Falta:</label>
+        <input type="date" id="data_falta" required><br><br>
+
+        <label for="motivo">Motivo:</label>
+        <input type="text" id="motivo" required><br><br>
+
+        <label for="aprovada">Aprovada:</label>
+        <select id="aprovada">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+        </select><br><br>
+
+        <label for="data_aprovacao">Data de Aprovação:</label>
+        <input type="date" id="data_aprovacao"><br><br>
+
+        <label for="observacoes">Observações:</label>
+        <textarea id="observacoes"></textarea><br><br>
+
+        <button type="submit">Cadastrar Justificativa de Falta</button>
+    </form>
+
+    <script>
+        // Preencha dinamicamente o campo de seleção de funcionários (se necessário)
+            document.addEventListener('DOMContentLoaded', async () => {
+                // Implemente o preenchimento dinâmico do campo de seleção de funcionários, se necessário
+            });
+
+            // Coletar o valor do campo 'aprovada' do formulário
+                const aprovadaValue = document.getElementById('aprovada').value;
+
+                // Mapear 'Sim' para true e 'Não' para false
+                const aprovada = aprovadaValue === 'Sim' ? true : false;
+
+            // Configurar o evento de submissão do formulário
+            const justificativaFaltaForm = document.getElementById('justificativaFaltaForm');
+            
+            justificativaFaltaForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const dadosJustificativa = {
+                    id_funcionario: document.getElementById('id_funcionario').value,
+                    data_falta: document.getElementById('data_falta').value,
+                    motivo: document.getElementById('motivo').value,
+                    aprovada: aprovada,
+                    data_aprovacao: document.getElementById('data_aprovacao').value,
+                    observacoes: document.getElementById('observacoes').value,
+                };
+
+                // Enviar os dados para o servidor
+                const resultado = await cadastrarJustificativaNoServidor(dadosJustificativa);
+
+                if (resultado) {
+                    alert('Justificativa de falta cadastrada com sucesso');
+                    justificativaFaltaForm.reset();
+                } else {
+                    alert('Erro ao cadastrar justificativa de falta');
+                }
+            });
+
+            // Função para enviar dados da justificativa de falta para o servidor
+            async function cadastrarJustificativaNoServidor(dadosJustificativa) {
+                try {
+                    const response = await fetch('/cadastrar-justificativas', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dadosJustificativa),
+                    });
+
+                    if (response.ok) {
+                        return true; // Sucesso na inserção
+                    } else {
+                        return false; // Erro na inserção
+                    }
+                } catch (error) {
+                    console.error(error);
+                    return false; // Erro na solicitação
+                }
+            };
+        // Preencha dinamicamente o campo de seleção de funcionários
+            document.addEventListener('DOMContentLoaded', async () => {
+                const idFuncionarioSelect = document.getElementById('id_funcionario');
+
+                // Enviar uma solicitação para buscar funcionários cadastrados
+                const response = await fetch('/funcionarios');
+                const funcionarios = await response.json();
+
+                // Preencher o campo de seleção com os funcionários
+                funcionarios.forEach((funcionario) => {
+                    const option = document.createElement('option');
+                    option.value = funcionario.id_funcionario;
+                    option.textContent = funcionario.nome_completo;
+                    idFuncionarioSelect.appendChild(option);
+                });
+            });
+
+
+    </script>
+</body>
+
+</html>

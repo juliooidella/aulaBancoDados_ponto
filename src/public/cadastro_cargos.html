@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Cargos</title>
+    <style>
+        /* Estilo base para os links do menu */
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        nav li {
+            display: inline;
+            /* Isso faz com que os itens fiquem na mesma linha */
+            margin-right: 10px;
+            /* Espaço entre os botões */
+        }
+    
+        nav a {
+            text-decoration: none;
+            background-color: #0073e6;
+            /* Cor de fundo do botão */
+            color: #fff;
+            /* Cor do texto do botão */
+            padding: 10px 20px;
+            /* Espaçamento interno do botão */
+            border-radius: 5px;
+            /* Cantos arredondados */
+        }
+    
+        /* Efeito de hover */
+        nav a:hover {
+            background-color: #0056a0;
+            /* Cor de fundo quando o mouse passa por cima */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/cadastrar-cargo">Cadastro de Cargos</a></li>
+            <li><a href="/cadastrar-funcionario">Cadastro de Funcionários</a></li>
+            <li><a href="/cadastrar-justificativas">Cadastro de Justificativas de Falta</a></li>
+        </ul>
+    </nav>
+    <h1>Cadastro de Cargos</h1>
+    <form id="cargoForm">
+        <label for="nome_cargo">Nome do Cargo:</label>
+        <input type="text" id="nome_cargo" required><br><br>
+
+        <label for="descricao_cargo">Descrição do Cargo:</label>
+        <textarea id="descricao_cargo"></textarea><br><br>
+
+        <label for="salario">Salário:</label>
+        <input type="number" id="salario"><br><br>
+
+        <label for="beneficios">Benefícios:</label>
+        <input type="text" id="beneficios"><br><br>
+
+        <button type="submit">Cadastrar Cargo</button>
+    </form>
+    <script>
+        const cargoForm = document.getElementById('cargoForm');
+
+        cargoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nome_cargo = document.getElementById('nome_cargo').value;
+            const descricao_cargo = document.getElementById('descricao_cargo').value;
+            const salario = document.getElementById('salario').value;
+            const beneficios = document.getElementById('beneficios').value;
+
+            const cargoData = {
+                nome_cargo,
+                descricao_cargo,
+                salario,
+                beneficios
+            };
+
+            try {
+                const response = await fetch('/cadastrar-cargo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(cargoData),
+                });
+
+                if (response.status === 201) {
+                    alert('Cargo cadastrado com sucesso');
+                    cargoForm.reset();
+                } else {
+                    alert('Erro ao cadastrar cargo');
+                }
+            } catch (error) {
+                alert('Erro de rede: ' + error);
+            }
+        });
+    </script>
+
+</body>
+</html>

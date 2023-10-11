@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registro de Ação do Usuário</title>
+</head>
+
+<body>
+    <h1>Registro de Ação do Usuário</h1>
+    <form id="userActionForm">
+        <input type="text" id="action" placeholder="Digite sua ação">
+        <button type="submit">Registrar Ação</button>
+    </form>
+
+    <script>
+        const userActionForm = document.getElementById('userActionForm');
+
+        userActionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const actionInput = document.getElementById('action');
+            const action = actionInput.value;
+
+            if (action) {
+                try {
+                    const response = await fetch('/register-action', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ action }),
+                    });
+
+                    if (response.status === 201) {
+                        console.log('Ação do usuário registrada com sucesso.');
+                    } else {
+                        console.error('Erro ao registrar ação do usuário.');
+                    }
+                } catch (error) {
+                    console.error('Erro de rede:', error);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
