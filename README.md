@@ -16,7 +16,8 @@
 
 **Passo 2: Preparando o ambiente de desenvolvimento**
 
-3. Abra o prompt de comando no Windows.
+3. Abra o prompt de comando no Windows. ![image](https://github.com/juliooidella/aulaBancoDados_ponto/assets/22839053/30b337b2-187c-478e-84b3-269b685c15ca)
+
 4. Navegue até a pasta "Documents" digitando o seguinte comando e pressionando "Enter":
 
    
