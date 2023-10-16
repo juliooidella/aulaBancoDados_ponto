@@ -11,6 +11,7 @@
        action TEXT
    );
 
+![image](https://github.com/juliooidella/aulaBancoDados_ponto/assets/22839053/a81adb47-b778-4583-8cd4-d9e764d31727)
 
    Isso criará uma tabela de exemplo chamada `user_actions`.
 
@@ -22,13 +23,16 @@
 
    
    cd Documents
+   ![image](https://github.com/juliooidella/aulaBancoDados_ponto/assets/22839053/0d97cfad-75a8-455f-8771-725be5c51a5c)
+
   
 
-5. Clone o projeto Node.js digitando o seguinte comando e pressionando "Enter":
+6. Clone o projeto Node.js digitando o seguinte comando e pressionando "Enter":
 
   
    git clone https://github.com/juliooidella/aulaBancoDados_ponto.git
- 
+ ![image](https://github.com/juliooidella/aulaBancoDados_ponto/assets/22839053/07277476-33e3-4e7f-bc2d-f18a4eb30c5d)
+
 
    Esse comando irá clonar o aplicativo que vamos usar para a demonstração.
 
@@ -38,6 +42,7 @@
 
 
    cd aulaBancoDados_ponto\src
+![image](https://github.com/juliooidella/aulaBancoDados_ponto/assets/22839053/39f89b68-1cc4-4147-b3ce-2ce8710ccf98)
 
 
 7. Execute o projeto Node.js digitando o seguinte comando e pressionando "Enter":
@@ -45,6 +50,8 @@
 
    node app.js
   
+![image](https://github.com/juliooidella/aulaBancoDados_ponto/assets/22839053/aacda475-3dd7-4b12-b6fd-c1a4aa8e935f)
+
 
 **Passo 4: Acessando a aplicação no navegador**
 
@@ -56,7 +63,6 @@ http://localhost:3000/register-action
 
 Isso iniciará a aplicação Node.js que interage com o banco de dados PostgreSQL, permitindo que você compreenda a integração entre aplicativos e bancos de dados e a importância dos comandos SQL.
 
-Divirta-se explorando e aprendendo! Este tutorial é uma introdução ao desenvolvimento web com Node.js e SQL, e você pode expandir seu conhecimento a partir daqui.
 
 
 Agora vamos criar as demais tabelas da nossa aplicação do ponto e depois abra no navegador o endereço: http://localhost:3000/cadastrar-cargo
