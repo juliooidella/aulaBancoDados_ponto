@@ -33,6 +33,10 @@ app.get('/cadastrar-funcionario', (req, res) => {
    res.sendFile(__dirname + '/public/cadastro_funcionarios.html');
 });
 
+app.get('/', (req, res) => {
+   res.sendFile(__dirname + '/public/cadastro_cargos.html');
+});
+
 app.post('/register-action', async (req, res) => {
    const { action } = req.body;
 
